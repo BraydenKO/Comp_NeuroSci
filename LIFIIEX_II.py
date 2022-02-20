@@ -55,9 +55,6 @@ class LIFNeurons:
     self.t = 0.
     self.steps = 0
 
-  def V(self):
-    return self.v + dt / self.tau * (self.el - self.v + self.r * i)
-
   def ode_step(self, dt, i):
 
     # Update running time and steps
@@ -65,7 +62,7 @@ class LIFNeurons:
     self.steps += 1
 
     # One step of discrete time integration of dt
-    self.v = V()
+    self.v = self.v + dt / self.tau * (self.el - self.v + self.r * i)
 
     # Spike and clamp
     self.spiked = (self.v >= self.vth)
